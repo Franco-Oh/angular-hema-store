@@ -25,4 +25,5 @@ export class ProductsService {
     const productsRef = doc(this.fireStore, `productInterface/${product.id}`);
     return deleteDoc(productsRef);
   }
+
 }

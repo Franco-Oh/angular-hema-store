@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Firestore } from '@angular/fire/firestore';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsersInterface } from 'src/app/interfaces/users-interface';
+import { UserDataService } from 'src/app/services/user-data.service';
 import { UsersService } from 'src/app/services/users.service';
+import { MyValidations } from 'src/app/utils/my-validations';
 
 @Component({
   selector: 'app-registro',
@@ -14,25 +17,28 @@ export class RegistroComponent implements OnInit {
   formRegister!:FormGroup;
   msgCorreoRepetido = false;
   msgRegistrado = false;
-  counter:number = 5;
+  respuestaRegistro:any;
 
   datos: UsersInterface = {
     id:null,
-    name:'',
-    apellido:'',
+    name:null,
+    apellido:null,
     edad:null,
-    email:'',
-    password:'',
-    perfil:'usuario'
+    email:null,
+    password:null,
+    perfil:''
   }
 
-  constructor( private userservice:UsersService, private router:Router, private formBuilder:FormBuilder ){
+  constructor( private usersService:UsersService, private userData:UserDataService, private router:Router, private formBuilder:FormBuilder, private firestore: Firestore ){
     this.formRegister = new FormGroup({
+      id: new FormControl(),
       name: new FormControl(),
       apellido: new FormControl(),
       edad: new FormControl(),
       email: new FormControl(),
-      password: new FormControl()
+      password: new FormControl(),
+      perfil: new FormControl(),
+      // pass2: new FormControl()
     })
   }
 
@@ -69,7 +75,18 @@ export class RegistroComponent implements OnInit {
           Validators.pattern('^[a-zA-Z0-9]+$'),
           Validators.minLength(6)
         ]
-      ]
+      ],
+      perfil:['', 
+        [
+          Validators.required,
+        ]
+      ],
+      // pass2:['', 
+      //   [
+      //     MyValidations.claveAdmin,
+      //     Validators.required
+      //   ]
+      // ]
     });
   }
 
@@ -77,21 +94,16 @@ export class RegistroComponent implements OnInit {
     console.log(this.formRegister.value);
     console.log(this.datos);
     
-    this.userservice.registerUser(this.formRegister.value).then( response => {
-      console.log(response);
+    this.usersService.registerUser(this.formRegister.value).then( response => {
+      this.respuestaRegistro = response;
       this.msgRegistrado = true;
-      setTimeout(() => {
-        this.counter--;
-      }, 1000);
-      setTimeout(() => {
-        this.counter--;
-      }, 2000);
-      setTimeout(() => {
-        this.counter--;
-      }, 3000);
-      setTimeout(() => {
-        this.counter--;
-      }, 4000);
+      if (this.respuestaRegistro) {
+        console.log('exito al crear usuario');
+        this.datos.id = this.respuestaRegistro.user.uid;
+        console.log('nuevo id --->' + this.datos.id);
+        console.log('todos los datos --->' + JSON.stringify(this.datos));
+        this.userData.addUser(this.datos);
+      }
       setTimeout(() => {
         this.msgRegistrado = false;
         this.router.navigate(['/login']);
@@ -104,7 +116,6 @@ export class RegistroComponent implements OnInit {
         this.msgCorreoRepetido = false;
       }, 5000);
     });
-
   }
 
 }

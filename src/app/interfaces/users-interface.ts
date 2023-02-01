@@ -1,9 +1,9 @@
 export interface UsersInterface {
     id?:string|null;
-    name:string;
-    apellido:string;
-    edad:any;
-    email:string;
-    password:string;
-    perfil:'usuario'|'admin';
+    name:string|null;
+    apellido:string|null;
+    edad:number|null;
+    email:string|null;
+    password:string|null;
+    perfil:string;
 }
