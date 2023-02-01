@@ -1,1 +1,15 @@
-<p>productos works!</p>
+<div class="w-full my-8 flex justify-center items-center">
+    <div class="w-fit grid grid-cols-2 gap-5 p-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+        <div id="card" class="w-48 rounded-lg px-4 py-2 border" *ngFor="let product of products">
+            <h3 class="text-center font-bold product-image mb-2">{{ product.nombre | titlecase }}</h3>
+            <div>
+                <img class="w-40 h-40 rounded mb-2" style="background-size:cover;" src="{{product.foto}}" alt="imagen producto">
+            </div>
+            <p>
+            <span class="mb-2"> {{ product.precio | currency:'S/ ' }} </span>
+            </p>
+            <p class="mb-2">{{ product.descripcion }}</p>
+            <button class="button-text w-full rounded-xl" [routerLink]="['/detalle', product.id]">Detalles</button>
+        </div>
+    </div>
+</div>

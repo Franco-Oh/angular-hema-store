@@ -1,1 +1,34 @@
-<p>login works!</p>
+<div class="container mx-auto my-12 p-5 pb-12 text-center border w-4/5 md:w-3/5 lg:w-2/5">
+    <h1 class="text-4xl font-bold mt-1 mb-3 pb-1">BIENVENIDO!</h1>
+    <p class="mb-12">Entra a tu cuenta para poder comprar productos</p>
+    <form [formGroup]="formLogin">
+        <p *ngIf="msgCorreoInvalido"> El correo y/o la contraseña no son validos</p>
+        <div class="mb-5">
+            <label for="email" class="text-lg font-medium text-gray-900 mr-3">Email: </label>
+            <input type="email" name="email" id="email" placeholder="Ingresar email" formControlName="email" class="px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded-lg transition ease-in-out m-0 focus:text-gray-700 focus:border-blue-500 focus:outline-none focus:drop-shadow-lg"><br>
+            <span appValidacion *ngIf="this.formLogin.get('email')?.invalid">
+                <span *ngIf="this.formLogin.get('email')?.dirty" class="text-red-700"> (Debe ser un correo válido)</span>
+            </span><br>
+        </div>
+        <div>
+            <label for="password" class="text-lg font-medium text-gray-900 mr-3">Contraseña: </label>
+            <input type="password" name="password" id="password" placeholder="Ingresar contraseña" formControlName="password" class="px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded-lg transition ease-in-out m-0 focus:text-gray-700 focus:border-blue-500 focus:outline-none focus:drop-shadow-lg"><br>
+            <span appValidacion *ngIf="this.formLogin.get('password')?.invalid">
+                <span *ngIf="this.formLogin.get('password')?.dirty" class="text-red-700">(Debe tener mínimo 6 caracteres numericos)</span>
+            </span><br>
+        </div>
+        <div class="my-8">
+            <button *ngIf="!formLogin.invalid" (click)="onSubmit()" class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-lg font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-black focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800 hover:drop-shadow-lg">
+                <span class="relative px-5 py-2 transition-all ease-in duration-75 bg-white rounded-md group-hover:bg-opacity-0">
+                    Login
+                </span>
+            </button>
+            <button *ngIf="formLogin.invalid" [disabled]="formLogin.invalid" class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 text-lg font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 text-black cursor-no-drop">
+                <span class="relative px-5 py-2 transition-all ease-in duration-75 bg-gray-500 rounded-md">
+                    Login
+                </span>
+            </button>
+        </div>
+    </form>
+    <p>Si aún no estas registrado, puedes hacerlo <a class="border p-2 rounded-lg hover:text-white hover:bg-blue-400 hover:drop-shadow-lg" [routerLink]="['/newuser']">AQUÍ</a></p>
+</div>

@@ -1,0 +1,49 @@
+<div class="container mx-auto my-12 p-5 pb-12 text-center border w-4/5 md:w-3/5 lg:w-2/5">
+    <form [formGroup]="formRegister">
+        <h1 class="text-3xl font-semibold mt-1 mb-8 pb-1">Regístrate</h1>
+        <div class="mb-5">
+            <p *ngIf="msgCorreoRepetido" class="text-red-700">El correo ya existe</p>
+            <p *ngIf="msgRegistrado" class="text-green-700">¡Ya estás registrado!<br><span>Te vamos a enviar nuevamente al Login en {{counter}}</span></p>
+        </div>
+        <div class="mb-5">
+            <label for="name" class="text-lg font-medium text-gray-900 mr-3">Nombres: </label>
+            <input type="text" name="name" id="name" formControlName="name" class="px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded-lg transition ease-in-out m-0 focus:text-gray-700 focus:border-blue-500 focus:outline-none focus:drop-shadow-lg" [(ngModel)]="datos.name"><br>
+            <span appValidacion *ngIf="this.formRegister.get('name')?.invalid">
+                <span *ngIf="this.formRegister.get('name')?.dirty" class="text-red-700"> (Debe tener minimo 3 caracteres)</span>
+            </span><br>
+        </div>
+        <div class="mb-5">
+            <label for="apellido" class="text-lg font-medium text-gray-900 mr-3">Apellidos: </label>
+            <input type="text" name="apellido" id="apellido" formControlName="apellido" class="px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded-lg transition ease-in-out m-0 focus:text-gray-700 focus:border-blue-500 focus:outline-none focus:drop-shadow-lg"><br>
+            <span appValidacion *ngIf="this.formRegister.get('apellido')?.invalid">
+                <span *ngIf="this.formRegister.get('apellido')?.dirty" class="text-red-700"> (Debe tener minimo 3 caracteres)</span>
+            </span><br>
+        </div>
+        <div class="mb-5">
+            <label for="edad" class="text-lg font-medium text-gray-900 mr-3">Edad: </label>
+            <input type="number" name="edad" id="edad" formControlName="edad" class="px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded-lg transition ease-in-out m-0 focus:text-gray-700 focus:border-blue-500 focus:outline-none focus:drop-shadow-lg"><br>
+            <span appValidacion *ngIf="this.formRegister.get('edad')?.invalid">
+                <span *ngIf="this.formRegister.get('edad')?.dirty" class="text-red-700"> (Debe tener un número válido)</span>
+            </span><br>
+        </div>
+        <div class="mb-5">
+            <label for="email" class="text-lg font-medium text-gray-900 mr-3">Email: </label>
+            <input type="email" name="email" id="email" formControlName="email" class="px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded-lg transition ease-in-out m-0 focus:text-gray-700 focus:border-blue-500 focus:outline-none focus:drop-shadow-lg"><br>
+            <span appValidacion *ngIf="this.formRegister.get('email')?.invalid">
+                <span *ngIf="this.formRegister.get('email')?.dirty" class="text-red-700"> (Debe ser un correo válido)</span>
+            </span><br>
+        </div>
+        <div class="mb-5">
+            <label for="password" class="text-lg font-medium text-gray-900 mr-3">Contraseña: </label>
+            <input type="password" name="password" id="password" formControlName="password" class="px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded-lg transition ease-in-out m-0 focus:text-gray-700 focus:border-blue-500 focus:outline-none focus:drop-shadow-lg"><br>
+            <span appValidacion *ngIf="this.formRegister.get('password')?.invalid">
+                <span *ngIf="this.formRegister.get('password')?.dirty" class="text-red-700"> (Debe tener minimo 6 caracteres numericos)</span>
+            </span><br>
+        </div>
+        <div>
+            <button *ngIf="formRegister.invalid" [disabled]="formRegister.invalid" class="text-green-700 border border-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 cursor-no-drop bg-gray-300">Registrarte</button>
+            <button *ngIf="!formRegister.invalid" (click)="onSubmit()" class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800 hover:drop-shadow-lg">Registrarte</button>
+            <button type="reset" class="text-black hover:text-white border border-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 hover:drop-shadow-lg">Borrar</button>
+        </div>
+    </form>
+</div>
