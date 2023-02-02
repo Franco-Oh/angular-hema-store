@@ -91,8 +91,8 @@ export class RegistroComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.formRegister.value);
-    console.log(this.datos);
+    console.log('desde el registro usuarios---> ' + this.formRegister.value);
+    console.log('desde el registro usuarios---> ' + this.datos);
     
     this.usersService.registerUser(this.formRegister.value).then( response => {
       this.respuestaRegistro = response;

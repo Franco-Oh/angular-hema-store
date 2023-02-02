@@ -28,16 +28,19 @@
     
                 <!-- Dropdown session -->
                 <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
-                    <div class="px-4 py-3">
-                        <span class="block text-sm text-gray-900 dark:text-white">Bonnie Green</span>
-                        <span class="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">name@flowbite.com</span>
+                    <div *ngIf="userLoggedIn" class="px-4 py-3">
+                        <span class="block text-sm text-gray-900 dark:text-white">{{userLoggedIn.name}} {{userLoggedIn.apellido}} ({{userLoggedIn.edad}})</span>
+                        <span class="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">{{userLoggedIn.email}}</span>
                     </div>
                     <ul class="py-2" aria-labelledby="user-menu-button">
-                        <li>
+                        <li *ngIf="!userLoggedIn">
                             <a [routerLink]="['/login']" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Iniciar Sesion</a>
                         </li>
-                        <li>
+                        <li *ngIf="userLoggedIn">
                             <a (click)="logout()" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Cerrar Sesion</a>
+                        </li>
+                        <li>
+                            <a (click)="logout()" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Cerrar Sesion si</a>
                         </li>
                     </ul>
                 </div>
@@ -64,7 +67,7 @@
                     <a [routerLink]="['/productos']" class="block py-2 pl-3 pr-4 text-gray-400 rounded hover:text-white hover:bg-gray-700">Productos</a>
                 </li>
                 <li>
-                    <a [routerLink]="['/']" class="block py-2 pl-3 pr-4 text-gray-400 rounded hover:text-white hover:bg-gray-700">Contacto</a>
+                    <a [routerLink]="['/lista']" class="block py-2 pl-3 pr-4 text-gray-400 rounded hover:text-white hover:bg-gray-700">Lista</a>
                 </li>
             </ul>
         </div>

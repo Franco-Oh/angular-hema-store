@@ -40,6 +40,13 @@ export class ProdRegistroComponent implements OnInit {
           Validators.minLength(1)
         ]
       ],
+      oferta:['', 
+        [
+          Validators.required,
+          Validators.pattern('[0-9]*'),
+          Validators.minLength(1)
+        ]
+      ],
       stock:['', 
         [
           Validators.required,
@@ -65,7 +72,7 @@ export class ProdRegistroComponent implements OnInit {
   async onSubmit(){
     console.log(this.formRegister.value);
     const response = this.productsService.addProduct(this.formRegister.value);
-    console.log(response);
+    console.log('desde el prod registro---> '+ response);
     this.msgRegistrado = true;
     setTimeout(()=>{
       this.formRegister.reset();

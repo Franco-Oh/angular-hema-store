@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collectionData } from '@angular/fire/firestore';
-import { addDoc, collection } from '@firebase/firestore';
+import { Firestore, collectionData, getDoc } from '@angular/fire/firestore';
+import { addDoc, collection, doc } from '@firebase/firestore';
 import { UsersInterface } from '../interfaces/users-interface';
 import { Observable } from 'rxjs';
 
@@ -11,9 +11,9 @@ export class UserDataService {
 
   constructor(private firestore: Firestore ) { }
 
-  getUser(): Observable<UsersInterface[]> {
-    const productsRef = collection(this.firestore, 'usuarios');
-    return collectionData(productsRef, { idField: 'id' }) as Observable<UsersInterface[]>;
+  getUser(uid: string) {
+    const userRef = doc(this.firestore, `usuarios/${uid}`);
+    return getDoc(userRef);
   }
 
   addUser(usersInterface: UsersInterface) {

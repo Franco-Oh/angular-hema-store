@@ -41,15 +41,13 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(){
-    this.userService.login(this.formLogin.value)
-    .then(
-      response => {
-        console.log(response)
+    this.userService.login(this.formLogin.value).then(response => {
+        console.log('desde el login---> '+ response)
         this.router.navigate(['/home']);
       }
     )
     .catch( error => {
-      console.log(error);
+      console.log('desde el login---> '+ error);
       this.msgCorreoInvalido = true;
       // Tiempo de 5 segundos para borrar información
       setTimeout(()=>{

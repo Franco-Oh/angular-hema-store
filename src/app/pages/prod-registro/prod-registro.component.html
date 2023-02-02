@@ -18,7 +18,7 @@
         </div>
         <div class="mb-5">
             <label for="oferta" class="text-lg font-medium text-gray-900 mr-3">Oferta: </label>
-            <input type="number" name="oferta" id="oferta" formControlName="oferta" placeholder="oferta del producto" class="px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded-lg transition ease-in-out m-0 focus:text-gray-700 focus:border-blue-500 focus:outline-none focus:drop-shadow-lg"><br>
+            <input type="number" name="oferta" id="oferta" formControlName="oferta" placeholder="Rebaja del producto" class="px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded-lg transition ease-in-out m-0 focus:text-gray-700 focus:border-blue-500 focus:outline-none focus:drop-shadow-lg"><br>
         </div>
         <div class="mb-5">
             <label for="stock" class="text-lg font-medium text-gray-900 mr-3">Stock: </label>
@@ -36,7 +36,7 @@
         </div>
         <div class="mb-5">
             <label for="descripcion" class="text-lg font-medium text-gray-900 mr-3">Descripcion: </label>
-            <textarea type="text" name="descripcion" id="descripcion" formControlName="descripcion" placeholder="Link del producto" cols="30" rows="10" class="px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded-lg transition ease-in-out m-0 focus:text-gray-700 focus:border-blue-500 focus:outline-none focus:drop-shadow-lg"></textarea><br>
+            <textarea type="text" name="descripcion" id="descripcion" formControlName="descripcion" placeholder="Modelo, color, tela, talla. etc." cols="30" rows="10" class="px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded-lg transition ease-in-out m-0 focus:text-gray-700 focus:border-blue-500 focus:outline-none focus:drop-shadow-lg"></textarea><br>
             <span appValidacion *ngIf="this.formRegister.get('descripcion')?.invalid">
                 <span *ngIf="this.formRegister.get('descripcion')?.dirty" class="text-red-700"> (Debe tener una descripcion)</span>
             </span><br>

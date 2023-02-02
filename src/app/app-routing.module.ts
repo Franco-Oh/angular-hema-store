@@ -10,6 +10,7 @@ import { canActivate, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { ProdListaComponent } from './pages/prod-lista/prod-lista.component';
 import { ProdRegistroComponent } from './pages/prod-registro/prod-registro.component';
 import { ProdDetalleComponent } from './pages/prod-detalle/prod-detalle.component';
+import { AdminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
   {path:'home', component: HomeComponent},
@@ -23,6 +24,8 @@ const routes: Routes = [
   {path:'newprod', component: ProdRegistroComponent, ...canActivate(()=> redirectUnauthorizedTo(['/login']))},
   {path:'**', pathMatch: 'full', redirectTo: 'home'}
 ];
+
+// canActivate:[AdminGuard]}
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
